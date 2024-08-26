@@ -27,15 +27,15 @@ typedef enum
     False,
     True
     } Logic;
-
+    
 typedef enum
     {
-    Negative = -1,
-    Null,
-    Positive
-    } Definition;
-
-
+    NEGATIVE = -1,
+    NULL,
+    POSITIVE
+    } Comparison_with_zero;
+    
+    
 
 void Input (double* a, double* b, double* c);
 
@@ -50,7 +50,7 @@ int SolveLine (double a, double b, double c,
 int SolveSquare (double a, double b, double c,
                  double* x1, double* x2);
 
-int Comparison_with_zero (double y);
+int IS_zero (double y);
 
 int IS_comparison (double n, double m);
 
@@ -139,7 +139,7 @@ int Calculation (double a, double b, double c,
     assert (x2 != 0);
     assert (x1 != x2);
 
-    if (Comparison_with_zero (a) == Null)
+    if (IS_zero (a) == True)
         return SolveLine (a, b, c, x1);
     else /* if (a != 0) */
         return SolveSquare (a, b, c, x1, x2);
@@ -154,9 +154,9 @@ int SolveLine (double a, double b, double c,
 
     assert (x1 != 0);
 
-    if (Comparison_with_zero (b) == Null)
+    if (IS_zero (b) == True)
         {
-        if (Comparison_with_zero (c) == Null)
+        if (IS_zero (c) == True)
             return IN_FINITY;
         else /* if (c != 0)*/
             return NO_ROOTS;
@@ -202,7 +202,7 @@ int SolveSquare (double a, double b, double c,
 
     double d = b * b - 4 * a * c;
 
-    if (Comparison_with_zero(d) == Negative)
+    if (Comparison_with_zero(d) == Negative) 
         return NO_ROOTS;
     else if (Comparison_with_zero(d) == Null)
         {
@@ -223,10 +223,10 @@ int SolveSquare (double a, double b, double c,
 int Comparison_with_zero (double y) /*Сравниваем с нулём некоторую переменную*/
     {
     if (fabs(y) < MICRO)
-        return  Null;
+        return  NULL;
     else if (y > MICRO)
         return Positive;
-    else
+    else 
         return Negative;
     }
 
@@ -313,7 +313,7 @@ else
     const int N = 7;
 
     StructTest test1 = {1, 1, 2, -3, 1, -3, 2};
-    StructTest test2 = {1, 1.1, 2.2, -3.3, 1, -3, 2};
+    StructTest test2 = {1.1, 2.2, -3.3, 1, -3, 2};
     StructTest test3 = {3, 1, -4, 4, 2, 0, 1};
     StructTest test4 = {4, 0, 0, 0, 0, 0, IN_FINITY};
     StructTest test5 = {5, 0, 2, -3, 1.5, 0, 1};
